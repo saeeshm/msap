@@ -229,11 +229,11 @@ msap <- function(datafile, name=datafile, no.bands="u", nDec=4, meth=TRUE, rm.re
 			}
 		
 			#PCoA
-			if(do.pcoa)pcoa(DM, groups, inds, name, "MSL")
+			if(do.pcoa) PCOA.MSL <- pcoa(DM, groups, inds, name, "MSL")
 			if(do.amova){
 				#AMOVA
 				cat("\nPerforming AMOVA\n")
-     		diffAmova(DM, groups, nDec, do.pairwisePhiST)
+     		AMOVA.MSL <- diffAmova(DM, groups, nDec, do.pairwisePhiST)
 			}
 			
       DM.MSL <- DM
@@ -313,12 +313,12 @@ msap <- function(datafile, name=datafile, no.bands="u", nDec=4, meth=TRUE, rm.re
 			
 		}
 		#PCoA
-		if(do.pcoa) pcoa(DM, groups, inds, name, "NML")
+		if(do.pcoa) PCOA.NML <- pcoa(DM, groups, inds, name, "NML")
 		
 		if(do.amova){
 			#AMOVA
 			cat("\nPerforming AMOVA\n")
-			diffAmova(DM, groups, nDec, do.pairwisePhiST)
+			AMOVA.NML <- diffAmova(DM, groups, nDec, do.pairwisePhiST)
 		}
 		
 		if(do.mantel){
@@ -338,7 +338,11 @@ msap <- function(datafile, name=datafile, no.bands="u", nDec=4, meth=TRUE, rm.re
     transformed.MSL = if(meth && MSL.nloci>0) {data.frame(groups,inds,matM)} else {NULL},
     transformed.NML =  if(meth && NML.nloci>0) {data.frame(groups,inds,matN)} else {NULL},
     DM.MSL = if(exists("DM.MSL")) {DM.MSL} else {NULL},
+    AMOVA.MSL = if(exists("AMOVA.MSL")) {AMOVA.MSL} else {NULL},
+    PCOA.MSL = if(exists("PCOA.MSL")) {PCOA.MSL} else {NULL},
     DM.NML = if(exists("DM.NML")) {DM.NML} else {NULL},
+    AMOVA.NML = if(exists("AMOVA.NML")) {AMOVA.NML} else {NULL},
+    PCOA.NML = if(exists("PCOA.NML")) {PCOA.NML} else {NULL},
     DM.AFLP = if(exists("DM.AFLP")) {DM.AFLP} else {NULL}
      )
   
